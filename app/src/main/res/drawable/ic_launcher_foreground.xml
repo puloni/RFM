@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Golden Shield Outer -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M54,22 L76,28 C76,50 66,68 54,78 C42,68 32,50 32,28 Z" />
+    <!-- Shield Inner Dark Navy -->
+    <path
+        android:fillColor="#0B1B2B"
+        android:pathData="M54,25 L73,30 C73,49 64,65 54,74 C44,65 35,49 35,30 Z" />
+    <!-- Soccer Ball Base White -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,48 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <!-- Ball Center Pentagon -->
+    <path
+        android:fillColor="#1A1A1A"
+        android:pathData="M54,41 L60,45 L58,52 L50,52 L48,45 Z" />
+    <!-- Ball Patches -->
+    <path
+        android:fillColor="#1A1A1A"
+        android:pathData="M54,33 L50,38 L58,38 Z" />
+    <path
+        android:fillColor="#1A1A1A"
+        android:pathData="M39,45 L44,43 L45,49 Z" />
+    <path
+        android:fillColor="#1A1A1A"
+        android:pathData="M69,45 L64,43 L63,49 Z" />
+    <path
+        android:fillColor="#1A1A1A"
+        android:pathData="M44,59 L48,54 L44,53 Z" />
+    <path
+        android:fillColor="#1A1A1A"
+        android:pathData="M64,59 L60,54 L64,53 Z" />
+    <!-- Star on top -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M54,14 L56,19 L61,19 L57,22 L59,27 L54,24 L49,27 L51,22 L47,19 L52,19 Z" />
+</vector>

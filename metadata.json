@@ -1,0 +1,6 @@
+{
+  "name": "RFM 2013",
+  "description": "Faithful Android port of Real Football Manager 2013 with complete career simulation, tactics, squad management, transfers, match engine, and personal testing mod menu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
