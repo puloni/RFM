@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   extract:
-    if: ${{ hashFiles('Real Football Manager.zip') != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,6 +19,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          if [ ! -f "Real Football Manager.zip" ]; then
+            echo "No source ZIP remains. Nothing to extract."
+            exit 0
+          fi
+
           rm -rf /tmp/rfm-extract
           mkdir -p /tmp/rfm-extract
           unzip -q "Real Football Manager.zip" -d /tmp/rfm-extract
@@ -33,17 +37,12 @@ jobs:
             src="/tmp/rfm-extract"
           fi
 
-          rm -rf .pocketdev .kotlin
-          find . -type f -name "*.zip" -not -path "./Real Football Manager.zip" -delete
-
-          # Copy the extracted project into the repository root.
           cp -a "${src}/." .
 
-          # Do not keep generated caches or nested ZIP archives.
           rm -rf .pocketdev .kotlin
           find . -type f -name "*.zip" -delete
-
           rm -f "Real Football Manager.zip"
+          rm -f ".github/workflows/.trigger"
 
       - name: Commit extracted project
         shell: bash
