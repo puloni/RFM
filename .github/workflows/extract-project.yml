@@ -39,10 +39,14 @@ jobs:
 
           cp -a "${src}/." .
 
+          # GitHub's token cannot push newly extracted workflow files.
+          # Keep the extraction workflow itself, but do not commit project workflows.
+          rm -f .github/workflows/build-apk.yml
+          rm -f .github/workflows/.trigger .github/workflows/.trigger2
+
           rm -rf .pocketdev .kotlin
           find . -type f -name "*.zip" -delete
           rm -f "Real Football Manager.zip"
-          rm -f ".github/workflows/.trigger"
 
       - name: Commit extracted project
         shell: bash
