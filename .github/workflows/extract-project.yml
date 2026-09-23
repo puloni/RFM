@@ -1,0 +1,60 @@
+name: Extract Antigravity Project
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    if: ${{ hashFiles('Real Football Manager.zip') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract project
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/rfm-extract
+          mkdir -p /tmp/rfm-extract
+          unzip -q "Real Football Manager.zip" -d /tmp/rfm-extract
+
+          shopt -s dotglob nullglob
+          entries=(/tmp/rfm-extract/*)
+
+          if [ "${#entries[@]}" -eq 1 ] && [ -d "${entries[0]}" ]; then
+            src="${entries[0]}"
+          else
+            src="/tmp/rfm-extract"
+          fi
+
+          rm -rf .pocketdev .kotlin
+          find . -type f -name "*.zip" -not -path "./Real Football Manager.zip" -delete
+
+          # Copy the extracted project into the repository root.
+          cp -a "${src}/." .
+
+          # Do not keep generated caches or nested ZIP archives.
+          rm -rf .pocketdev .kotlin
+          find . -type f -name "*.zip" -delete
+
+          rm -f "Real Football Manager.zip"
+
+      - name: Commit extracted project
+        shell: bash
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Extract Real Football Manager Android project"
+          git push
